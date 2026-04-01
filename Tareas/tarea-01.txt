@@ -1,0 +1,338 @@
+FresnoPM@[MY_COMPUTER]:~/Repos/Cs de Datos para Negocios/Curso-e250-2026c1$  
+FresnoPM@[MY_COMPUTER]:~/Repos/Cs de Datos para Negocios/Curso-e250-2026c1$ pwd
+/home/FresnoPM/Repos/Cs de Datos para Negocios/Curso-e250-2026c1
+FresnoPM@[MY_COMPUTER]:~/Repos/Cs de Datos para Negocios/Curso-e250-2026c1$ cd /
+FresnoPM@[MY_COMPUTER]:/$ pwd
+/
+FresnoPM@[MY_COMPUTER]:/$ cd home
+FresnoPM@[MY_COMPUTER]:/home$ pwd
+/home
+FresnoPM@[MY_COMPUTER]:/home$ 
+FresnoPM@[MY_COMPUTER]:/home$ cd
+FresnoPM@[MY_COMPUTER]:~$ pwd
+/home/FresnoPM
+FresnoPM@[MY_COMPUTER]:~$ cd ../..
+FresnoPM@[MY_COMPUTER]:/$ pwd
+/
+FresnoPM@[MY_COMPUTER]:/$ cd ../../etc
+FresnoPM@[MY_COMPUTER]:/etc$ pwd
+/etc
+FresnoPM@[MY_COMPUTER]:/etc$ cd /
+FresnoPM@[MY_COMPUTER]:/$ cd etc
+FresnoPM@[MY_COMPUTER]:/etc$ pwd
+/etc
+FresnoPM@[MY_COMPUTER]:/etc$ whoami
+FresnoPM
+FresnoPM@[MY_COMPUTER]:/etc$ cd home/user/Dektop
+bash: cd: home/user/Dektop: No existe el archivo o el directorio
+FresnoPM@[MY_COMPUTER]:/etc$ cd home/FresnoPM/Dektop
+bash: cd: home/FresnoPM/Dektop: No existe el archivo o el directorio
+FresnoPM@[MY_COMPUTER]:/etc$ cd /home/FresnoPM/Dektop
+bash: cd: /home/FresnoPM/Dektop: No existe el archivo o el directorio
+FresnoPM@[MY_COMPUTER]:/etc$ cd ~/Dektop
+bash: cd: /home/FresnoPM/Dektop: No existe el archivo o el directorio
+FresnoPM@[MY_COMPUTER]:/etc$ cd /home/FresnoPM/Desktop
+FresnoPM@[MY_COMPUTER]:~/Desktop$ cd ~
+FresnoPM@[MY_COMPUTER]:~$ cd ~/Desktop/
+FresnoPM@[MY_COMPUTER]:~/Desktop$ pwd
+/home/FresnoPM/Desktop
+FresnoPM@[MY_COMPUTER]:~$ cd ~/Desktop/
+FresnoPM@[MY_COMPUTER]:~$ mkdir /tmp/tutorial
+FresnoPM@[MY_COMPUTER]:~$ cd /tmp/tutorial/
+FresnoPM@[MY_COMPUTER]:/tmp/tutorial$ mkdir dir1 dir2 dir3
+FresnoPM@[MY_COMPUTER]:/tmp/tutorial$ mkdir
+mkdir: falta un operando
+Pruebe 'mkdir --help' para más información.
+FresnoPM@[MY_COMPUTER]:/tmp/tutorial$ cd /etc ~/Desktop/
+bash: cd: demasiados argumentos
+FresnoPM@[MY_COMPUTER]:/tmp/tutorial$ ls
+dir1  dir2  dir3
+FresnoPM@[MY_COMPUTER]:/tmp/tutorial$ mkdir -p dir4/dir5/dir6
+FresnoPM@[MY_COMPUTER]:/tmp/tutorial$ ls
+dir1  dir2  dir3  dir4
+FresnoPM@[MY_COMPUTER]:/tmp/tutorial$ cd dir4 && ls
+dir5
+FresnoPM@[MY_COMPUTER]:/tmp/tutorial/dir4$ cd dir5 && ls
+dir6
+FresnoPM@[MY_COMPUTER]:/tmp/tutorial/dir4/dir5$ cd ../..
+FresnoPM@[MY_COMPUTER]:/tmp/tutorial$ mkdir --parents --verbose dir4/dir5
+FresnoPM@[MY_COMPUTER]:/tmp/tutorial$ ls
+dir1  dir2  dir3  dir4
+FresnoPM@[MY_COMPUTER]:/tmp/tutorial$ ls dir4/dir5
+dir6
+FresnoPM@[MY_COMPUTER]:/tmp/tutorial$ mkdir another folder
+FresnoPM@[MY_COMPUTER]:/tmp/tutorial$ ls
+another  dir1  dir2  dir3  dir4  folder
+FresnoPM@[MY_COMPUTER]:/tmp/tutorial$ mkdir "folder 1"
+FresnoPM@[MY_COMPUTER]:/tmp/tutorial$ mkdir "folder 2"
+FresnoPM@[MY_COMPUTER]:/tmp/tutorial$ mkdir folder\ 3
+FresnoPM@[MY_COMPUTER]:/tmp/tutorial$ mkdir "folder 4" "folder 5"
+FresnoPM@[MY_COMPUTER]:/tmp/tutorial$ mkdir -p "folder 6"/"folder 7"
+FresnoPM@[MY_COMPUTER]:/tmp/tutorial$ ls
+ another   dir2   dir4    'folder 1'  'folder 3'  'folder 5'
+ dir1      dir3   folder  'folder 2'  'folder 4'  'folder 6'
+FresnoPM@[MY_COMPUTER]:/tmp/tutorial$ ls > output.txt
+FresnoPM@[MY_COMPUTER]:/tmp/tutorial$ cat output.txt 
+another
+dir1
+dir2
+dir3
+dir4
+folder
+folder 1
+folder 2
+folder 3
+folder 4
+folder 5
+folder 6
+output.txt
+FresnoPM@[MY_COMPUTER]:/tmp/tutorial$ cat
+aa
+aa
+adadasd
+adadasd
+hello
+hello
+hello
+hello
+quit
+quit
+please close this app!
+please close this app!
+^C
+FresnoPM@[MY_COMPUTER]:/tmp/tutorial$ echo "This is a test"
+This is a test
+FresnoPM@[MY_COMPUTER]:/tmp/tutorial$ echo "This is a test" > test_1.txt
+FresnoPM@[MY_COMPUTER]:/tmp/tutorial$ echo "This is a second test" > test_2.txt
+FresnoPM@[MY_COMPUTER]:/tmp/tutorial$ echo "This is a third test" > test_3.txt
+FresnoPM@[MY_COMPUTER]:/tmp/tutorial$ ls
+ another   dir3    'folder 1'  'folder 4'   output.txt   test_3.txt
+ dir1      dir4    'folder 2'  'folder 5'   test_1.txt
+ dir2      folder  'folder 3'  'folder 6'   test_2.txt
+FresnoPM@[MY_COMPUTER]:/tmp/tutorial$ cat test_1.txt test_2.txt test_3.txt
+This is a test
+This is a second test
+This is a third test
+FresnoPM@[MY_COMPUTER]:/tmp/tutorial$ cat t* > combined.txt
+FresnoPM@[MY_COMPUTER]:/tmp/tutorial$ cat combined.txt 
+This is a test
+This is a second test
+This is a third test
+FresnoPM@[MY_COMPUTER]:/tmp/tutorial$ cat test_?.txt
+This is a test
+This is a second test
+This is a third test
+FresnoPM@[MY_COMPUTER]:/tmp/tutorial$ cat test_*
+This is a test
+This is a second test
+This is a third test
+FresnoPM@[MY_COMPUTER]:/tmp/tutorial$ cat t* >> combined.txt
+FresnoPM@[MY_COMPUTER]:/tmp/tutorial$ echo "I've appended a line!" >> combined.txt
+FresnoPM@[MY_COMPUTER]:/tmp/tutorial$ cat combined.txt 
+This is a test
+This is a second test
+This is a third test
+This is a test
+This is a second test
+This is a third test
+I've appended a line!
+FresnoPM@[MY_COMPUTER]:/tmp/tutorial$ less combined.txt
+FresnoPM@[MY_COMPUTER]:/tmp/tutorial$ echo "Lower case" > a.txt
+FresnoPM@[MY_COMPUTER]:/tmp/tutorial$ echo "Upper case" > A.TXT
+FresnoPM@[MY_COMPUTER]:/tmp/tutorial$ echo "Mixed case" > A.txt
+FresnoPM@[MY_COMPUTER]:/tmp/tutorial$ mv combined.txt dir1
+FresnoPM@[MY_COMPUTER]:/tmp/tutorial$ ls dir1
+combined.txt
+FresnoPM@[MY_COMPUTER]:/tmp/tutorial$ mv dir1/* .
+FresnoPM@[MY_COMPUTER]:/tmp/tutorial$ 2
+2: no se encontró la orden
+FresnoPM@[MY_COMPUTER]:/tmp/tutorial$ mv combined.txt test_* dir3 dir2
+FresnoPM@[MY_COMPUTER]:/tmp/tutorial$ ls
+ another   A.TXT   dir4       'folder 2'  'folder 5'
+ a.txt     dir1    folder     'folder 3'  'folder 6'
+ A.txt     dir2   'folder 1'  'folder 4'   output.txt
+FresnoPM@[MY_COMPUTER]:/tmp/tutorial$ ls dir2
+combined.txt  dir3  test_1.txt  test_2.txt  test_3.txt
+FresnoPM@[MY_COMPUTER]:/tmp/tutorial$ mv dir2/combined.txt dir4/dir5/dir6
+FresnoPM@[MY_COMPUTER]:/tmp/tutorial$ ls dir4/dir5/dir6
+combined.txt
+FresnoPM@[MY_COMPUTER]:/tmp/tutorial$ cp dir4/dir5/dir6/combined.txt .
+FresnoPM@[MY_COMPUTER]:/tmp/tutorial$ ls dir4/dir5/dir6
+combined.txt
+FresnoPM@[MY_COMPUTER]:/tmp/tutorial$ ls
+ another   combined.txt   folder     'folder 4'
+ a.txt     dir1          'folder 1'  'folder 5'
+ A.txt     dir2          'folder 2'  'folder 6'
+ A.TXT     dir4          'folder 3'   output.txt
+FresnoPM@[MY_COMPUTER]:/tmp/tutorial$ cp combined.txt backup_combined.txt && ls
+ another   backup_combined.txt   dir4       'folder 3'   output.txt
+ a.txt     combined.txt          folder     'folder 4'
+ A.txt     dir1                 'folder 1'  'folder 5'
+ A.TXT     dir2                 'folder 2'  'folder 6'
+FresnoPM@[MY_COMPUTER]:/tmp/tutorial$ mv backup_combined.txt combined_backup.txt && ls
+ another   combined_backup.txt   dir4       'folder 3'   output.txt
+ a.txt     combined.txt          folder     'folder 4'
+ A.txt     dir1                 'folder 1'  'folder 5'
+ A.TXT     dir2                 'folder 2'  'folder 6'
+FresnoPM@[MY_COMPUTER]:/tmp/tutorial$ mv "folder 1" folder_1
+FresnoPM@[MY_COMPUTER]:/tmp/tutorial$ mv "folder 2" folder_2
+FresnoPM@[MY_COMPUTER]:/tmp/tutorial$ mv "folder 3" folder_3
+FresnoPM@[MY_COMPUTER]:/tmp/tutorial$ mv "folder 4" folder_4
+FresnoPM@[MY_COMPUTER]:/tmp/tutorial$ mv "folder 5" folder_5
+FresnoPM@[MY_COMPUTER]:/tmp/tutorial$ mv "folder 6" folder_6
+FresnoPM@[MY_COMPUTER]:/tmp/tutorial$ ls
+another  A.TXT                dir1  folder    folder_3  folder_6
+a.txt    combined_backup.txt  dir2  folder_1  folder_4  output.txt
+A.txt    combined.txt         dir4  folder_2  folder_5
+FresnoPM@[MY_COMPUTER]:/tmp/tutorial$ rmdir folder_*
+rmdir: fallo al borrar 'folder_6': El directorio no está vacío
+FresnoPM@[MY_COMPUTER]:/tmp/tutorial$ rm -r folder_6
+FresnoPM@[MY_COMPUTER]:/tmp/tutorial$ ls
+another  A.txt  combined_backup.txt  dir1  dir4    output.txt
+a.txt    A.TXT  combined.txt         dir2  folder
+FresnoPM@[MY_COMPUTER]:/tmp/tutorial$ wc -l combined.txt
+7 combined.txt
+FresnoPM@[MY_COMPUTER]:/tmp/tutorial$ ls ~ > file_list.txt
+FresnoPM@[MY_COMPUTER]:/tmp/tutorial$ wc -l file_list.txt
+14 file_list.txt
+FresnoPM@[MY_COMPUTER]:/tmp/tutorial$ rm file_list.txt
+FresnoPM@[MY_COMPUTER]:/tmp/tutorial$ ls ~ | wc -l
+14
+FresnoPM@[MY_COMPUTER]:/tmp/tutorial$ ls /etc|wc -l
+258
+FresnoPM@[MY_COMPUTER]:/tmp/tutorial$ ls /etc | less
+FresnoPM@[MY_COMPUTER]:/tmp/tutorial$ cat combined.txt | uniq | wc -l
+7
+FresnoPM@[MY_COMPUTER]:/tmp/tutorial$ cat combined.txt | uniq | less
+FresnoPM@[MY_COMPUTER]:/tmp/tutorial$ man uniq
+FresnoPM@[MY_COMPUTER]:/tmp/tutorial$ sort combined.txt | less
+FresnoPM@[MY_COMPUTER]:/tmp/tutorial$ sort combined.txt | uniq | wc -l
+4
+FresnoPM@[MY_COMPUTER]:/tmp/tutorial$ cat /etc/shadow
+cat: /etc/shadow: Permiso denegado
+FresnoPM@[MY_COMPUTER]:/tmp/tutorial$ sudo cat /etc/shadow
+[sudo] contraseña para FresnoPM: 
+root:**[...]:[...]:[...]::::
+daemon:***[...]:[...]:[...]::::
+bin:*:**[...]:[...]:[...]::::
+sys:*:*[...]:[...]:[...]::::
+.....
+many others
+FresnoPM:$6$LZ[...]QrarYYBmKq$IxJ[...]KTlarVUSDJCrFJK[...]vpHrOB7tTgjGQN[...]nT7GZw9see7tsLvLC[...]
+ntpsec:!:*[...]:[...]:[...]::::
+rstudio-server:!*[...]:[...]:[...]::::
+FresnoPM@[MY_COMPUTER]:/tmp/tutorial$ sudo apt install tree
+Leyendo lista de paquetes... Hecho
+Creando árbol de dependencias... Hecho
+Leyendo la información de estado... Hecho
+tree ya está en su versión más reciente (2.1.1-2ubuntu3.24.04.2).
+fijado tree como instalado manualmente.
+0 actualizados, 0 nuevos se instalarán, 0 para eliminar y 2 no actualizados.
+FresnoPM@[MY_COMPUTER]:/tmp/tutorial$ cd /tmp/tutorial
+FresnoPM@[MY_COMPUTER]:/tmp/tutorial$ tree
+.
+├── another
+├── a.txt
+├── A.txt
+├── A.TXT
+├── combined_backup.txt
+├── combined.txt
+├── dir1
+├── dir2
+│   ├── dir3
+│   ├── test_1.txt
+│   ├── test_2.txt
+│   └── test_3.txt
+├── dir4
+│   └── dir5
+│       └── dir6
+│           └── combined.txt
+├── folder
+└── output.txt
+
+9 directories, 10 files
+FresnoPM@[MY_COMPUTER]:/tmp/tutorial$ ls
+another  A.txt  combined_backup.txt  dir1  dir4    output.txt
+a.txt    A.TXT  combined.txt         dir2  folder
+FresnoPM@[MY_COMPUTER]:/tmp/tutorial$ mv combined.txt .combined.tx
+FresnoPM@[MY_COMPUTER]:/tmp/tutorial$ ls
+another  A.txt  combined_backup.txt  dir2  folder
+a.txt    A.TXT  dir1                 dir4  output.txt
+FresnoPM@[MY_COMPUTER]:/tmp/tutorial$ cat .combined.tx 
+This is a test
+This is a second test
+This is a third test
+This is a test
+This is a second test
+This is a third test
+I've appended a line!
+FresnoPM@[MY_COMPUTER]:/tmp/tutorial$ mkdir .hidden
+FresnoPM@[MY_COMPUTER]:/tmp/tutorial$ mv .combined.tx .hidden/.combined.txt
+FresnoPM@[MY_COMPUTER]:/tmp/tutorial$ less .hidden/.combined.txt 
+FresnoPM@[MY_COMPUTER]:/tmp/tutorial$ ls
+another  A.txt  combined_backup.txt  dir2  folder
+a.txt    A.TXT  dir1                 dir4  output.txt
+FresnoPM@[MY_COMPUTER]:/tmp/tutorial$ ls -a
+.   another  A.txt  combined_backup.txt  dir2  folder   output.txt
+..  a.txt    A.TXT  dir1                 dir4  .hidden
+FresnoPM@[MY_COMPUTER]:/tmp/tutorial$ ls .hidden/
+FresnoPM@[MY_COMPUTER]:/tmp/tutorial$ ls -a .hidden/
+.  ..  .combined.txt
+FresnoPM@[MY_COMPUTER]:/tmp/tutorial$ tree
+.
+├── another
+├── a.txt
+├── A.txt
+├── A.TXT
+├── combined_backup.txt
+├── dir1
+├── dir2
+│   ├── dir3
+│   ├── test_1.txt
+│   ├── test_2.txt
+│   └── test_3.txt
+├── dir4
+│   └── dir5
+│       └── dir6
+│           └── combined.txt
+├── folder
+└── output.txt
+
+9 directories, 9 files
+FresnoPM@[MY_COMPUTER]:/tmp/tutorial$ tree -a
+.
+├── another
+├── a.txt
+├── A.txt
+├── A.TXT
+├── combined_backup.txt
+├── dir1
+├── dir2
+│   ├── dir3
+│   ├── test_1.txt
+│   ├── test_2.txt
+│   └── test_3.txt
+├── dir4
+│   └── dir5
+│       └── dir6
+│           └── combined.txt
+├── folder
+├── .hidden
+│   └── .combined.txt
+└── output.txt
+
+10 directories, 10 files
+FresnoPM@[MY_COMPUTER]:/tmp/tutorial$ cd ~
+FresnoPM@[MY_COMPUTER]:~$ rm -r /tmp/tutorial/
+FresnoPM@[MY_COMPUTER]:~$ ls /tmp
+config-err-arQB50
+...
+ignore_adaptive
+...
+systemd-private-2c302[...]a0-iio-sensor-proxy.service-J5hyoY
+systemd-private-2c3e2[...]a0-ModemManager.service-J8IhUi
+systemd-private-2c398[...]a0-ntpsec.service-lMDXcB
+systemd-private-2c32b[...]a0-polkit.service-rVmVT8
+systemd-private-2c32e[...]a0-systemd-logind.service-WrQNcn
+systemd-private-2c3d2[...]a0-systemd-resolved.service-HJI77G
+systemd-private-2c329[...]a0-upower.service-8amWon
