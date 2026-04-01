@@ -1,0 +1,10 @@
+
+ 264  gh auth login
+ 265  git init && git add . && git commit -m "initial commit - README file"
+ 266  gh repo create curso-e250-2026c1 --public --description "Repository for the Data Science for economics and businesses from University of Buenos Aires 2026's practical activities"
+ 267  git branch -a
+ 268  git remote add origin https://github.com/FresnoPM/curso-e250-2026c1.git
+ 269  git remote -v
+ 270  git push -u origin main
+ 271  git status
+ 272  history > Tareas/tarea-00.txt
