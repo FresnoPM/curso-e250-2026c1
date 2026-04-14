@@ -11,7 +11,7 @@ library(tidyverse)
 ## Aterrizajes y despeges 
 # https://datos.transporte.gob.ar/dataset/aterrizajes-y-despegues-procesados-por-la-administracion-nacional-de-aviacion-civil-anac
 
-anac_2025 <- read.csv2(file = "~/Repos/Cs de Datos para Negocios/Curso-e250-2026c1/202512-informe-ministerio-actualizado-dic-final.csv")
+anac_2025 <- read.csv2(file = "~/Repos/Cs de Datos para Negocios/Curso-e250-2026c1/materiales/202512-informe-ministerio-actualizado-dic-final.csv")
 glimpse(anac_2025)
 summary(anac_2025)
 
@@ -34,27 +34,21 @@ anac_2025 <-
 summary(anac_2025)
 glimpse(anac_2025)
 
-a <- 3
-a <- 5
-a
-
-
-
 ## Aeropuertos
 # Códigos de aeropuertos
-aeropuertos <- read_csv(file="~/Repos/Cs de Datos para Negocios/Curso-e250-2026c1/iata-icao.csv")
+aeropuertos <- read_csv(file="~/Repos/Cs de Datos para Negocios/Curso-e250-2026c1/materiales/iata-icao.csv")
 glimpse(aeropuertos)
 
 
 ## Clima
 # Servicio metereológico naciona
-clima <- read_csv(file="~/Repos/Cs de Datos para Negocios/Curso-e250-2026c1/registro_temperatura365d_smn.txt")
+clima <- read_csv(file="~/Repos/Cs de Datos para Negocios/Curso-e250-2026c1/materiales/registro_temperatura365d_smn.txt")
 
 # glimse(clima) no funciona porque estoy abriendo un txt
 View(clima)
 clima[1:2,]
 
-columnas_clima <- read_fwf(file = "~/Repos/Cs de Datos para Negocios/Curso-e250-2026c1/registro_temperatura365d_smn.txt"
+columnas_clima <- read_fwf(file = "~/Repos/Cs de Datos para Negocios/Curso-e250-2026c1/materiales/registro_temperatura365d_smn.txt"
                            , col_positions = fwf_widths(
                                                         c(8, 1, 5, 1,5,200) # agrego 2 columnas x e y que luego dropearé
                                                         , c('fecha', 'x', 'tmax', 'y', 'tmin','nombre')
