@@ -46,13 +46,14 @@ flights |>
 # 4) Was there a flight on every day of 2013?
 
 flights |>
-    filter(year == 2013) |>
-    count(year,month,day)
+    filter(year == 2013) |> # por las dudas me aseguro de que no se cuele ninguna línea que no haga refrencia al año 2013
+    count(year, month, day) # cuento cuántas combinaciones posibles hay de día-mes-año
 
 # Devuelve un tibble: 365 × 4, sabiendo que cada fila registra un vuelo que sucedió y no hay ninguna fila que indique la ausencia de vuelos, concluyo que hubo al menos 1 vuelo por cada día del año 2013
 
 # 5) Which flights traveled the farthest distance? Which traveled the least distance?
-
+flights |>
+    filter()
 
 
 
