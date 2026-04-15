@@ -19,9 +19,6 @@ flights |>
     filter(arr_delay >= 120 & dep_time == sched_dep_time)
         # & (dep_delay >= 60 & arr_delay) to-do
 
-        )
-
-
 
 # 2) Sort flights to find the flights with the longest departure delays. Find the flights that left earliest in the morning.
 
