@@ -68,3 +68,57 @@ flights |>
 # Does it matter what order you used filter() and arrange() if you’re using both? Why / why not? Think about the results and how much work the functions would have to do.
 #
 # No tiene sentido usar arrange antes de filter porque le das más trabajo a arrange.
+#
+
+
+
+
+# 3.3.5 Exercises
+
+# 1) Compare dep_time, sched_dep_time, and dep_delay. How would you expect those three numbers to be related?
+
+
+
+# 2) Brainstorm as many ways as possible to select dep_time, dep_delay, arr_time, and arr_delay from flights.
+
+
+
+# 3) What happens if you specify the name of the same variable multiple times in a select() call?
+
+
+
+# 4) What does the any_of() function do? Why might it be helpful in conjunction with this vector?
+
+variables <- c("year", "month", "day", "dep_delay", "arr_delay")
+
+# 5) Does the result of running the following code surprise you? How do the select helpers deal with upper and lower case by default? How can you change that default?
+
+flights |> select(contains("TIME"))
+
+# select helpers son case insensitive
+
+# 6) Rename air_time to air_time_min to indicate units of measurement and move it to the beginning of the data frame.
+
+
+flights |>
+    rename(air_time_min = air_time) |>
+    relocate(air_time_min, .before = 1)
+
+# forma alternativa
+
+flights |>
+    relocate(air_time_min = air_time, .before = 1)
+
+
+# 7) Why doesn’t the following work, and what does the error mean?
+
+    flights |>
+    select(tailnum) |>
+    arrange(arr_delay)
+
+#> Error in `arrange()`:
+#> ℹ In argument: `..1 = arr_delay`.
+#> Caused by error:
+#> ! object 'arr_delay' not found
+
+# este código falla al aplicar la función arrange() a una columna que ya no se encuentra en la tabla por haber quedado afuera de la selección de la primera fila select()
