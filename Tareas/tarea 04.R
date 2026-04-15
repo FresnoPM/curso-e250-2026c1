@@ -84,7 +84,9 @@ flights |>
 
 
 # 3) What happens if you specify the name of the same variable multiple times in a select() call?
-
+flights |>
+    select(arr_delay, arr_delay, dep_time)
+# muestra la columna repetida sólo una vez
 
 
 # 4) What does the any_of() function do? Why might it be helpful in conjunction with this vector?
@@ -122,3 +124,81 @@ flights |>
 #> ! object 'arr_delay' not found
 
 # este código falla al aplicar la función arrange() a una columna que ya no se encuentra en la tabla por haber quedado afuera de la selección de la primera fila select()
+#
+#
+#
+#  3.5.7 Exercises
+
+# 1) Which carrier has the worst average delays?
+# Challenge: can you disentangle the effects of bad airports vs. bad carriers? Why/why not? (Hint: think about flights |> group_by(carrier, dest) |> summarize(n()))
+#
+
+flights |>
+    group_by(carrier) |> # 16 carriers
+    summarise(
+        avg_dep_delay = mean(dep_delay, na.rm=TRUE),
+        avg_arr_delay = mean(arr_delay, na.rm=TRUE)
+    ) |>
+    # arrange(desc(avg_dep_delay))
+    slice_max(avg_dep_delay, n = 6) |>
+    slice_max(avg_arr_delay, n = 1)   # esto se puede mejorar to-do
+
+
+
+# el carrier con peor delay, tanto de partida como de llegada es el F9
+
+# 2) Find the flights that are most delayed upon departure to each destination.
+
+
+
+# 3) How do delays vary over the course of the day? Illustrate your answer with a plot.
+
+# 4) What happens if you supply a negative n to slice_min() and friends?
+
+# 5) Explain what count() does in terms of the dplyr verbs you just learned. What does the sort argument to count() do?
+
+# 6) Suppose we have the following tiny data frame:
+
+        df <- tibble(
+            x = 1:5,
+            y = c("a", "b", "a", "a", "b"),
+            z = c("K", "K", "L", "L", "K")
+        )
+
+# Write down what you think the output will look like, then check if you were correct, and describe what group_by() does.
+
+    df |>
+        group_by(y)
+
+# 7) Write down what you think the output will look like, then check if you were correct, and describe what arrange() does. Also, comment on how it’s different from the group_by() in part (a).
+
+    df |>
+        arrange(y)
+
+# Write down what you think the output will look like, then check if you were correct, and describe what the pipeline does.
+
+    df |>
+        group_by(y) |>
+        summarize(mean_x = mean(x))
+
+    Write down what you think the output will look like, then check if you were correct, and describe what the pipeline does. Then, comment on what the message says.
+
+    df |>
+        group_by(y, z) |>
+        summarize(mean_x = mean(x))
+
+    Write down what you think the output will look like, then check if you were correct, and describe what the pipeline does. How is the output different from the one in part (d)?
+
+        df |>
+        group_by(y, z) |>
+        summarize(mean_x = mean(x), .groups = "drop")
+
+    Write down what you think the outputs will look like, then check if you were correct, and describe what each pipeline does. How are the outputs of the two pipelines different?
+
+        df |>
+        group_by(y, z) |>
+        summarize(mean_x = mean(x))
+
+    df |>
+        group_by(y, z) |>
+        mutate(mean_x = mean(x))
