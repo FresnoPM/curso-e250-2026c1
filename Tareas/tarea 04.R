@@ -12,12 +12,11 @@ library(tidyverse)
 # - Were delayed by at least an hour, but made up over 30 minutes in flight
 
 flights |>
-    filter(
-        (arr_delay >= 120)
-        & (dest == 'IAH' | dest == 'HOU')
-        & (carrier == 'UA' | carrier =='DL')
-        & (month == 7 | month == 8 | month == 9)
-        & (arr_delay >= 120 & dep_time == sched_dep_time)
+    filter(arr_delay >= 120) |>
+    filter(dest == 'IAH' | dest == 'HOU') |>
+    filter(carrier == 'UA' | carrier =='DL') |>
+    filter(month == 7 | month == 8 | month == 9) |>
+    filter(arr_delay >= 120 & dep_time == sched_dep_time)
         # & (dep_delay >= 60 & arr_delay) to-do
 
         )
