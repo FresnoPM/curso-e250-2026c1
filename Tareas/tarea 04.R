@@ -33,8 +33,8 @@ flights |>
 # 2) Sort flights to find the flights with the longest departure delays. Find the flights that left earliest in the morning.
 
 flights |>
-    arrange(desc(dep_delay))
-    filter(dep_time < 1200)
+    filter(dep_delay >= mean(dep_delay, na.rm = TRUE)) |>  # muestro únicamente los vuelos cuya demora de partida sea mayor a la media
+    filter(dep_time < 1200 & dep_time >= 600) |> # muestro sólo los que salieron durante la mañana (supongo que la mañana empieza a las 6 y antes de eso es la madrugada)
     arrange(dep_time)
 
 
