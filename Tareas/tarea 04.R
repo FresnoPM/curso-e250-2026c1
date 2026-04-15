@@ -59,8 +59,12 @@ flights |>
 
 # 5) Which flights traveled the farthest distance? Which traveled the least distance?
 flights |>
-    filter()
+    filter(distance >= mean(distance, na.rm=TRUE)) # los vuelos que recorrieron una distancia mayor a la media
+
+flights |>
+    filter(distance <= mean(distance, na.rm=TRUE)) # los vuelos que recorrieron una distancia menor a la media
 
 
-
-# Does it matter what order you used filter() and arrange() if you’re using both? Why/why not? Think about the results and how much work the functions would have to do.
+# Does it matter what order you used filter() and arrange() if you’re using both? Why / why not? Think about the results and how much work the functions would have to do.
+#
+# No tiene sentido usar arrange antes de filter porque le das más trabajo a arrange.
