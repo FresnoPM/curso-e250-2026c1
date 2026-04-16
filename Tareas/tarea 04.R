@@ -139,8 +139,8 @@ flights |>
 
 # este código falla al aplicar la función arrange() a una columna que ya no se encuentra en la tabla por haber quedado afuera de la selección de la primera fila select()
 #
-#
-#
+
+
 #  3.5.7 Exercises
 
 # 1) Which carrier has the worst average delays?
@@ -158,14 +158,14 @@ flights |>
 
 
 # el carrier con peor delay, tanto de partida como de llegada es el F9
-#
-#
+
+
 
 # Challenge: can you disentangle the effects of bad airports vs. bad carriers?
 # Why/why not? (Hint: think about flights |> group_by(carrier, dest) |> summarize(n()))
 
-
-flights |> group_by(carrier, dest) |> summarize(n())
+print(
+flights |> group_by(carrier, dest) |> summarize(n()), n=80)
 
 # 2) Find the flights that are most delayed upon departure to each destination.
 flights |>
@@ -174,15 +174,26 @@ flights |>
         avg_arr_delay = mean(arr_delay, na.rm=TRUE)
     ) |>
     slice_max(avg_arr_delay, n=10)
-# no entiendo esto to-do
+# no entiendo esta consigna to-do
 
 # 3) How do delays vary over the course of the day? Illustrate your answer with a plot.
 
+df_to_plot <- flights |>
+    summarise(
+        .by = c(hour, minute),
+        avg_dep_delay = mean(dep_delay, na.rm = TRUE),
+        avg_arr_delay = mean(arr_delay, na.rm = TRUE)
+    )
 
+# to-do: plot
 
 # 4) What happens if you supply a negative n to slice_min() and friends?
 
+# negative n values in slice_* functions nullify it's effect
+
 # 5) Explain what count() does in terms of the dplyr verbs you just learned. What does the sort argument to count() do?
+
+# La función count() genera grupos y agrega una nueva columna al final con la cantidad de filas correspondientes a caada uno de los grupos de esa clase.
 
 # 6) Suppose we have the following tiny data frame:
 
@@ -192,40 +203,58 @@ flights |>
             z = c("K", "K", "L", "L", "K")
         )
 
+
 # Write down what you think the output will look like, then check if you were correct, and describe what group_by() does.
+#
+# Se crea un tibble de 5 filas con 3 columnas, una por cada variable (x, y, z)
 
     df |>
         group_by(y)
+
+# group_by(y) muestra el tibble df tal como está pero crea una clase "y" que contiene 2 grupos "a" y "b"
 
 # 7) Write down what you think the output will look like, then check if you were correct, and describe what arrange() does. Also, comment on how it’s different from the group_by() in part (a).
 
     df |>
         arrange(y)
 
-# Write down what you think the output will look like, then check if you were correct, and describe what the pipeline does.
+# arrange(y) ordena el tibble en orden ascendente (por defecto) de la columna "y". No involucra ningún tipo de clase ni grupo.
+
+# 8) Write down what you think the output will look like, then check if you were correct, and describe what the pipeline does.
 
     df |>
         group_by(y) |>
         summarize(mean_x = mean(x))
+# se va amostrar un tibble con 1 fila por grupo de la clase "y" con el nombre del grupo ("a" y "b") en una columna y el promedio de los valores que toman las filas de cada grupo en la columna "x".
 
-    Write down what you think the output will look like, then check if you were correct, and describe what the pipeline does. Then, comment on what the message says.
+# 9) Write down what you think the output will look like, then check if you were correct, and describe what the pipeline does. Then, comment on what the message says.
 
     df |>
         group_by(y, z) |>
         summarize(mean_x = mean(x))
 
-    Write down what you think the output will look like, then check if you were correct, and describe what the pipeline does. How is the output different from the one in part (d)?
+# muestra 2 columnas "y", "z" con las 3 posibles combinaciones de sus valors (a, K), (a, L), (b, K) y en la 3er columna el promedio de valores de la columna "x" correspondiente a las filas que tienen esta combinación de valoers en las columnas "y" y "z".
+#
+
+# 10) Write down what you think the output will look like, then check if you were correct, and describe what the pipeline does. How is the output different from the one in part (d)?
 
         df |>
         group_by(y, z) |>
         summarize(mean_x = mean(x), .groups = "drop")
 
-    Write down what you think the outputs will look like, then check if you were correct, and describe what each pipeline does. How are the outputs of the two pipelines different?
+# muestra el mismo output que el anterior pero disuelve la clase (y, z)
 
-        df |>
+
+# 11) Write down what you think the outputs will look like, then check if you were correct, and describe what each pipeline does. How are the outputs of the two pipelines different?
+
+    df |>
         group_by(y, z) |>
         summarize(mean_x = mean(x))
 
     df |>
         group_by(y, z) |>
         mutate(mean_x = mean(x))
+
+#
+#
+#
