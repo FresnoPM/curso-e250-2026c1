@@ -99,7 +99,13 @@ flights |>
 
 # 4) What does the any_of() function do? Why might it be helpful in conjunction with this vector?
 
-variables <- c("year", "month", "day", "dep_delay", "arr_delay")
+variables <- c("year", "day", "month", "dep_delay", "arr_delay")
+
+flights |>
+    select(any_of(variables)) # toma el vector "variables" que contiene nombres de columnas y muestra aquellas columnas del tibble que coinciden con cualquiera de los nombres del array. Si hubiera alguno que no coincide es ignorado.
+
+flights |>
+    select(all_of(variables)) # all_of, en vez, requiere que todos los elementos del arreglo "variables" coincidan con el nombre de alguna de las columnas
 
 # 5) Does the result of running the following code surprise you? How do the select helpers deal with upper and lower case by default? How can you change that default?
 
