@@ -82,11 +82,19 @@ flights |>
 # 2) Brainstorm as many ways as possible to select dep_time, dep_delay, arr_time, and arr_delay from flights.
 
 
+flights |>
+    select(dep_time, dep_delay, arr_time, arr_delay)
+
+flights |>
+    select((starts_with("dep")), starts_with("arr"))
+
+flights |>
+    select(4,6,7,9)
 
 # 3) What happens if you specify the name of the same variable multiple times in a select() call?
 flights |>
     select(arr_delay, arr_delay, dep_time)
-# muestra la columna repetida sólo una vez
+# muestra sólo una vez la columna cuyo nombre está repetido
 
 
 # 4) What does the any_of() function do? Why might it be helpful in conjunction with this vector?
@@ -130,8 +138,6 @@ flights |>
 #  3.5.7 Exercises
 
 # 1) Which carrier has the worst average delays?
-# Challenge: can you disentangle the effects of bad airports vs. bad carriers? Why/why not? (Hint: think about flights |> group_by(carrier, dest) |> summarize(n()))
-#
 
 flights |>
     group_by(carrier) |> # 16 carriers
@@ -146,12 +152,27 @@ flights |>
 
 
 # el carrier con peor delay, tanto de partida como de llegada es el F9
+#
+#
+
+# Challenge: can you disentangle the effects of bad airports vs. bad carriers?
+# Why/why not? (Hint: think about flights |> group_by(carrier, dest) |> summarize(n()))
+
+
+flights |> group_by(carrier, dest) |> summarize(n())
 
 # 2) Find the flights that are most delayed upon departure to each destination.
-
-
+flights |>
+    group_by(dest) |>
+    summarise(
+        avg_arr_delay = mean(arr_delay, na.rm=TRUE)
+    ) |>
+    slice_max(avg_arr_delay, n=10)
+# no entiendo esto to-do
 
 # 3) How do delays vary over the course of the day? Illustrate your answer with a plot.
+
+
 
 # 4) What happens if you supply a negative n to slice_min() and friends?
 
