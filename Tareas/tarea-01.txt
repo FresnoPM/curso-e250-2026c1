@@ -1,4 +1,10 @@
-FresnoPM@[MY_COMPUTER]:~/Repos/Cs de Datos para Negocios/Curso-e250-2026c1$  
+## Tarea 01 - Práctica de CLI
+# . Visitar [Tutorial Linux](https://documentation.ubuntu.com/desktop/en/latest/tutorial/the-linux-command-line-for-beginners/#) y hacer las partes prácticas desde la sección “Abrir la terminal” hasta la sección de “Un poco de plomería”
+# . [Grabar el log](https://www.google.com/search?q=powershell+record+log) de comandos y salidas en un archivo (p.ej. “tarea01.txt” en la carpeta "Tareas" creada antes o en una subcarpeta "Tareas/Tarea01").
+
+
+
+FresnoPM@[MY_COMPUTER]:~/Repos/Cs de Datos para Negocios/Curso-e250-2026c1$
 FresnoPM@[MY_COMPUTER]:~/Repos/Cs de Datos para Negocios/Curso-e250-2026c1$ pwd
 /home/FresnoPM/Repos/Cs de Datos para Negocios/Curso-e250-2026c1
 FresnoPM@[MY_COMPUTER]:~/Repos/Cs de Datos para Negocios/Curso-e250-2026c1$ cd /
@@ -7,7 +13,7 @@ FresnoPM@[MY_COMPUTER]:/$ pwd
 FresnoPM@[MY_COMPUTER]:/$ cd home
 FresnoPM@[MY_COMPUTER]:/home$ pwd
 /home
-FresnoPM@[MY_COMPUTER]:/home$ 
+FresnoPM@[MY_COMPUTER]:/home$
 FresnoPM@[MY_COMPUTER]:/home$ cd
 FresnoPM@[MY_COMPUTER]:~$ pwd
 /home/FresnoPM
@@ -72,7 +78,7 @@ FresnoPM@[MY_COMPUTER]:/tmp/tutorial$ ls
  another   dir2   dir4    'folder 1'  'folder 3'  'folder 5'
  dir1      dir3   folder  'folder 2'  'folder 4'  'folder 6'
 FresnoPM@[MY_COMPUTER]:/tmp/tutorial$ ls > output.txt
-FresnoPM@[MY_COMPUTER]:/tmp/tutorial$ cat output.txt 
+FresnoPM@[MY_COMPUTER]:/tmp/tutorial$ cat output.txt
 another
 dir1
 dir2
@@ -114,7 +120,7 @@ This is a test
 This is a second test
 This is a third test
 FresnoPM@[MY_COMPUTER]:/tmp/tutorial$ cat t* > combined.txt
-FresnoPM@[MY_COMPUTER]:/tmp/tutorial$ cat combined.txt 
+FresnoPM@[MY_COMPUTER]:/tmp/tutorial$ cat combined.txt
 This is a test
 This is a second test
 This is a third test
@@ -128,7 +134,7 @@ This is a second test
 This is a third test
 FresnoPM@[MY_COMPUTER]:/tmp/tutorial$ cat t* >> combined.txt
 FresnoPM@[MY_COMPUTER]:/tmp/tutorial$ echo "I've appended a line!" >> combined.txt
-FresnoPM@[MY_COMPUTER]:/tmp/tutorial$ cat combined.txt 
+FresnoPM@[MY_COMPUTER]:/tmp/tutorial$ cat combined.txt
 This is a test
 This is a second test
 This is a third test
@@ -211,7 +217,7 @@ FresnoPM@[MY_COMPUTER]:/tmp/tutorial$ sort combined.txt | uniq | wc -l
 FresnoPM@[MY_COMPUTER]:/tmp/tutorial$ cat /etc/shadow
 cat: /etc/shadow: Permiso denegado
 FresnoPM@[MY_COMPUTER]:/tmp/tutorial$ sudo cat /etc/shadow
-[sudo] contraseña para FresnoPM: 
+[sudo] contraseña para FresnoPM:
 root:**[...]:[...]:[...]::::
 daemon:***[...]:[...]:[...]::::
 bin:*:**[...]:[...]:[...]::::
@@ -258,7 +264,7 @@ FresnoPM@[MY_COMPUTER]:/tmp/tutorial$ mv combined.txt .combined.tx
 FresnoPM@[MY_COMPUTER]:/tmp/tutorial$ ls
 another  A.txt  combined_backup.txt  dir2  folder
 a.txt    A.TXT  dir1                 dir4  output.txt
-FresnoPM@[MY_COMPUTER]:/tmp/tutorial$ cat .combined.tx 
+FresnoPM@[MY_COMPUTER]:/tmp/tutorial$ cat .combined.tx
 This is a test
 This is a second test
 This is a third test
@@ -268,7 +274,7 @@ This is a third test
 I've appended a line!
 FresnoPM@[MY_COMPUTER]:/tmp/tutorial$ mkdir .hidden
 FresnoPM@[MY_COMPUTER]:/tmp/tutorial$ mv .combined.tx .hidden/.combined.txt
-FresnoPM@[MY_COMPUTER]:/tmp/tutorial$ less .hidden/.combined.txt 
+FresnoPM@[MY_COMPUTER]:/tmp/tutorial$ less .hidden/.combined.txt
 FresnoPM@[MY_COMPUTER]:/tmp/tutorial$ ls
 another  A.txt  combined_backup.txt  dir2  folder
 a.txt    A.TXT  dir1                 dir4  output.txt
