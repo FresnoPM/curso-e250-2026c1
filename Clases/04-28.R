@@ -2,6 +2,7 @@
 
 
 install.packages("gutenbergr")
+install.packages("tidytext")
 library(gutenbergr)
 library(dplyr)
 library(tidytext)
