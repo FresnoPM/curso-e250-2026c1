@@ -21,3 +21,10 @@
 # https://github.com/kateto/R-Network-Visualization-Workshop
 # descargar datasets 3.1 https://kateto.net/polnet2025.html#dataset-1-edgelist
 #
+#
+#
+# Layouts:
+# - force directed layout es cuando lo más intenso está en el centro
+# - circular
+# - hierarchical
+# - grid
