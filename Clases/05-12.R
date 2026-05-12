@@ -88,4 +88,4 @@ plot(net, edge.arrow.size=.2, edge.color="orange",
 
 
 # to-do: terminar el tutorial
-
+# preparar preguntas sobre heatmap que vamos a seguir profundizando
