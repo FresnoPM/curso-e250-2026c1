@@ -1,3 +1,4 @@
+# PPT: Clase 14
 # https://kateto.net/network-visualization
 
 install.packages("igraph")
@@ -7,16 +8,8 @@ install.packages("ggraph")
 install.packages("visNetwork")
 install.packages("threejs")
 install.packages("networkD3")
-install.packages("ndtv") # no lo puedo instalar porque no tengo dependencias que hay que isntalar por separado y no está disponible para ubuntu 24....
+install.packages("ndtv")
 
-library(igraph)
-library(network)
-library(sna)
-library(ggraph)
-library(visNetwork)
-library(threejs)
-library(networkD3)
-library(ndtv)
 rm(list =ls())
 
 plot(x=1:10, y=rep(5,10), pch=19, cex=3, col="dark red")
