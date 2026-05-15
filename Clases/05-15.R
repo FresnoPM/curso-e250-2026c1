@@ -29,7 +29,10 @@
 #
 # Según el tipo de distribución nos es más relevante diferentes métricas, no sabemos a priori cuál distribución tienen nuestros datos, por ejemplo si fuera normal usaríamos la media, pero si es asimétrica nos conviene usar la mediana para identidicar el valor típico de la variable analizada
 #
+# Es importante la topología de redes para identidicar riesgo sistémico , vulnerabilidad o propensión a desintegrarse bajo ataque intencional o shocks aleatorios, etc.
+# Por ejemplo Facebook tiene topología escala libre distribución exponencial? (lice como poisson con clustering muy altos
 #
+# Tarea: repasar todo lo relacionado con visualización
 
 
 

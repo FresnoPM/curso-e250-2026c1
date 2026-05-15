@@ -50,8 +50,8 @@ ecount(yeast)   # cantidad de aristas
 ### Atributos de nodos: name (ORF), Class (clase funcional), Description.
 is_directed(yeast)
 is_weighted(yeast)
-is_connected(yeast)   # ¿es conexa?
-
+is_connected(yeast)   # ¿es conexa? ¿está integrada, concentrada? trae la media, cosa que suele ser poco relevante ¿es una gran clase comunicante?
+is_isolated(yeast)
 ## podemos investigar cuantos componentes hay
 ### ~80–100 componentes en total
 ### Una gigante con ~2.300 – 2.400 nodos (más del 90% de la red)
@@ -63,6 +63,7 @@ comp$no
 
 # Tamaño de cada componente (cantidad de nodos)
 comp$csize
+sort(comp$csize)
 
 # Tamaño del componente más grande (la "componente gigante")
 max(comp$csize)
@@ -168,6 +169,7 @@ plot(0:(length(dist_cruda)-1), dist_cruda, log = "xy", pch = 19)
 ### La red no es homogénea: está organizada en módulos.
 
 table(V(yeast)$Class)        # distribución de clases funcionales
+# dejo de trabajar con nodos sino con clases de nodos, clusters de nodos con características similares
 ### Hay 256 proteínas con clase P
 ### Hay 558 proteínas con clase U
 ### Hay 60 con clase A
