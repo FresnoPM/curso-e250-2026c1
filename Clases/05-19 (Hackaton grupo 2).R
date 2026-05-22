@@ -20,9 +20,6 @@ g
 #     Group (v/n),
 #     weight (e/n)
 # + edges from 6f42903: ...
-E(g)[1:10]$weight
-print(g, n=12)
-
 is_directed(g)   # TRUE
 is_weighted(g)   # TRUE
 is_connected(g)   # TRUE
@@ -40,24 +37,24 @@ summary(df)
 # 1st Qu.:20.00   1st Qu.:20.00   1st Qu.: 2.000
 # Median :37.00   Median :38.00   Median : 2.000
 # Mean   :38.24   Mean   :39.41   Mean   : 4.565
-# 3rd Qu.:57.00   3rd Qu.:58.00   3rd Qu.: 6.000
+# 3rd Qu.:57.00,rd Qu.:58.00,rd Qu.: 6.000
 # Max.   :81.00   Max.   :81.00   Max.   :16.000
 
 library(dplyr)
 as.data.frame(table(df$weight)) |> arrange(desc(Freq))
 #   #    Weight Freq
-  # 1     2     207
-  # 2     1     202
+  # 1   ,   ,07
+  # 2     1   ,02
   # 3     4     107
   # 4     6     80
   # 5     8     51
-  # 6    12     39
-  # 7    10     37
-  # 8    14     34
-  # 9     3     31
-  # 10   16     22
+  # 6    12  ,9
+  # 7    10  ,7
+  # 8    14  ,4
+  # 9  ,  ,1
+  # 10   16   ,2
   # 11    5     5
-  # 12    7     2
+  # 12    7   ,
 
 # La mayoría de las conexiones tienen peso 1 o 2 mientras que hay muy poquitas de peso 7 o 5
 # ¿qué relevancia tiene esto?
@@ -76,8 +73,8 @@ as.data.frame(table(df$weight)) |> arrange(desc(Freq))
 
 grados <- degree(g)
 summary(grados)
-# Min.  1st Qu. Median  Mean    3rd Qu. Max.
-# 2.00  12.00   18.00   20.17   26.00   62.00
+# Min.  1st Qu. Median  Mean ,rd Qu. Max.
+# 2.00  12.00   18.00 ,0.17 ,6.00   62.00
 media <- mean(grados)         # grado promedio
 ### # 20.17284
 ### Cada grupo interactúa con ~20 otros en promedio. ¿Es mucho o poco?
@@ -118,41 +115,153 @@ histDen(grados,color_default="lightgray", color_bajo="pink", color_alto="lightbl
 #   Tiene cola larga?
 #
 #   Cuáles son  los 5 nodos más conectados (hubs?)
+
 V(g)[order(betweenness(g), decreasing=TRUE)[1:5]]
 # 5/81 vertices, from 6f42903:
-# 37 62  5  2 29
+# 37 62  5, 29
+
+sort(degree(g), decreasing = TRUE)[1:10]
+# 62 54 44 43 39 38 38 37 37 36
+
+
+V(g)[order(betweenness(g), decreasing=FALSE)[1:5]]
+# los menos conectados
+# 8 11 14 18 32
+
 
 #   Tiene sentido que sean hubs?
+# En grafos dirigidos se pueden diferenciar dos tipos de centralidad de los vertices.
+# Los hubs son vertices que tienen un grado de salida alto.
+# Las autoridades son vertices que tienen un grado de entrada alto.
+
+E(g)[[1:5]]
+# + 5/817 edges from 6f42903:
+#   tail head tid hid weight
+# 1   57   52  57  52      4
+# 2   76   42  76  42     14
+# 3   12   69  12  69      4
+# 4   43   34  43  34      4
+# 5   28   47  28  47     10
+
+
+# Group the club members from two Groups
+c1 = grepl(4, V(g)$Group)
+c2 = grepl(1, V(g)$Group)
+#Edges between each 2 Groups (in or out, not directed)
+E(g)[V(g)[c1]%--%V(g)[c2]]
+
+
+# 33 en Grupo 1:
+# 2,8,11,14,15,18,19,20,21,24,25,26,29,31,32,34,35,37,39,41,43,46,48,51,52,54,55,56,57,58,64,79,80
+#
+# 26 en Grupo 2:
+# 5 ,6 ,7 ,10,12,13,16,22,23,27,28,30,33,40,42,47,49,63,65,66,67,68,69,71,72,76,77
+#
+# 19 en Grupo 3:
+# 1, 3, 4, 9, 17,36,38, 44,45,53,59,60,61,62,73,74,75,78,81
+#
+# 2 en Grupo 4:
+# 50, 70
 
 
 
-#   Densidad? Es una red densa o esparsa?
-edge_density(g)        # 0.1260802
+# Grupo 1 con Grupo 1 : 317
+# Grupo 1 con Grupo 2 : 65
+# Grupo 1 con Grupo 3 : 34
+# Grupo 1 con Grupo 4 : 25
+# Grupo 1 : 441
+#
+# Grupo 2 con Grupo 1 : 65
+# Grupo 2 con Grupo 2 : 250
+# Grupo 2 con Grupo 3 : 19
+# Grupo 2 con Grupo 4 : 5
+# Grupo 2 : 339
+#
+# Grupo 3 con Grupo 1 : 34
+# Grupo 3 con Grupo 2 : 19
+# Grupo 3 con Grupo 3 : 96
+# Grupo 3 con Grupo 4 : 4
+# Grupo 3 : 153
+#
+# Grupo 4 con Grupo 1 : 25
+# Grupo 4 con Grupo 2 : 5
+# Grupo 4 con Grupo 3 : 4
+# Grupo 4 con Grupo 4 : 2
+# Grupo 4 : 36
 
-### La densidad es 0.13%.
-### Si fuera densa (densidad alta), todos los
-### grupos interactuarían con todos y no habría especialización funcional.
-### La rareza es una propiedad, no un defecto.
-
-### Comparación útil: una red completa con 2.617 nodos tendría ~3.4 millones de aristas.
-### Yeast tiene ~12.000. O sea, usa menos del 1% de las conexiones posibles, pero
-### alcanza para mantener viva a la levadura.
-
-
-### Por qué importa esto para el análisis?
-### Algunas métricas no se pueden calcular sobre una red desconectada o dan resultados raros.
-### Por ejemplo diameter.
-diameter(g)        # da Inf o un valor extraño
-mean_distance(g)   # solo considera pares conectados
-### La solución estándar: trabajar con la componente gigante!!!!!!
-
-# cuando más que una conexión entre 2 nodos, al hacer comunidades entonces podemos simplificar colapsandolas en una sola conexión
 
 
 
-# Coeficiente de clustering (transitividad)
-transitivity(g, type = "global")   # global
-mean(transitivity(g, type = "local"), na.rm = TRUE)  # local promedio
+# Vecinos de cada uno de los nodos más conectados
+# 37 62  5  2 29
+neighbors(g, "37") # 36
+neighbors(g, "62") # 34
+neighbors(g,  "5") #  28
+neighbors(g,  "2") #  17
+neighbors(g, "29") # 41
+
+
+hubs_orden <- order(degree(g), decreasing = TRUE)
+
+degree(
+  g,
+  v = c(37,62,5,2,29),
+  mode = c("all", "out", "in", "total"),
+  loops = TRUE,
+  normalized = FALSE
+)
+
+
+#Compute betweenness centrality
+BetC = betweenness(g,directed = TRUE)
+#Compute Closeness centrality
+CloC = closeness(g,mode = "all")
+#Compute Degree centrality using both In & Out Edges
+DegC = degree(g,mode = "all")
+#Add attribute to the nodes
+V(g)$BetC = BetC
+V(g)$CloC = CloC
+V(g)$DegC = DegC
+#grouping the top nodes and other than top nodes
+important = as.vector(ifelse(degree(g) >= 9, "Top" , "Simple"))
+
+#making nodes and edges data frames
+nodes <- data.frame(id = V(g)$Group, title = V(g)$Group, group = important)
+nodes <- nodes[order(nodes$id, decreasing = F),]
+edges <- as_data_frame(g, what="edges")[1:2]
+
+vis.nodes<- nodes
+vis.links <- edges
+
+#giving some styles to nodes and edges
+vis.nodes$shape  <- as.vector(ifelse(important=="Top", "square" , "dot"))
+vis.nodes$shadow <- TRUE # Nodes will drop shadow
+vis.nodes$title  <- vis.nodes$id # Text on click
+vis.nodes$label  <- vis.nodes$id # Node label
+vis.nodes$size   <- degree(g)+10 # Node size
+vis.nodes$borderWidth <- 2 # Node border width
+
+vis.links$width <- E(g)$weight # line width
+vis.links$color <- "gray"    # line color
+vis.links$arrows <- "to" # arrows: 'from', 'to', or 'middle'
+vis.links$smooth <- FALSE    # should the edges be curved?
+vis.links$shadow <- FALSE    # edge shadow
+
+
+vis.nodes$color.background <- as.vector(ifelse(important=="Top", "slategrey" , "tomato"))
+vis.nodes$color.border <- "black"
+vis.nodes$color.highlight.background <- "orange"
+vis.nodes$color.highlight.border <- "darkred"
+
+visnet3 = visNetwork(vis.nodes, vis.links)
+visnet3 <- visGroups(visnet3, groupname = "Top", shape = "square",
+                     color = list(background = "gray", border="black"))
+visnet3 <- visGroups(visnet3, groupname = "Simple", shape = "dot",
+                     color = list(background = "tomato", border="black"))
+visLegend(visnet3, main="Legend", position="right", ncol=1)
+
+
+
 
 
 
@@ -164,9 +273,10 @@ colors = brewer.pal(4, "Dark2")
 V(UKfaculty)$color = sapply(V(UKfaculty)$Group, function(x) colors[x])
 
 
+
 plot(UKfaculty, layout = layout_nicely(UKfaculty, dim = 2),
      vertex.color = V(UKfaculty)$color, vertex.frame.color = NA,
-     vertex.label = NA, vertex.shape = 'square',
+     vertex.label = V(UKfaculty)$Group, vertex.shape = 'square',
      vertex.size = 3.5, edge.arrow.size = 0.3, edge.curved = TRUE,
      edge.width = E(UKfaculty)$weight ^ 0.8,
      edge.color = rgb(0, 0, 0, alpha = 0.1))
@@ -179,5 +289,27 @@ UKfaculty_undirected <- as_undirected(
 )
 
 
+
+
+#   Densidad? Es una red densa o esparsa?
+edge_density(g)        # 0.1260802
+### La densidad es 0.13%.
+### Comparación útil: una red completa con 81 nodos tendría 3280 aristas.
+### UKfaculty tiene 817. Eso significa que se aprovecha el 25% de su potencial.
+
+
+### Por qué importa esto para el análisis?
+### Algunas métricas no se pueden calcular sobre una red desconectada o dan resultados raros.
+### Por ejemplo diameter.
+diameter(g)        # da Inf o un valor extraño
+mean_distance(g)   # solo considera pares conectados
+
+# cuando hay más que una conexión entre 2 nodos, al hacer comunidades entonces podemos simplificar colapsandolas en una sola conexión
+
+
+
+# Coeficiente de clustering (transitividad)
+transitivity(g, type = "global")   # global
+mean(transitivity(g, type = "local"), na.rm = TRUE)  # local promedio
 
 
