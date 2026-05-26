@@ -1,0 +1,66 @@
+TP https://docs.google.com/presentation/d/1HVCpRSJtE71mNBlK9GhZZqW5iEtXGlq0yVqyGGYeh9Y/edit?slide=id.g3e3e2337116_0_0#slide=id.g3e3e2337116_0_0
+Consigna:
+Evaluar supervivencia e influencia de cada personaje es diferente a través de cada uno de los métodos
+¿Cuáles son los personajes más importante de este libro/casa? ¿qué significa importante?
+Plantear diferentes preguntas alternativas
+
+
+Preguntas:
+- Quien es el personaje más importante de la saga?
+Depende de cómo definimos “importante”
+Una opción: Más conexiones
+
+- Qué responde el análisis de redes?
+Cuantas  conexiones tiene cada persona?
+Qué persona es más influyente (más conectada?)
+Hay clusters de personas muy conectadas entre sí?
+Hay puentes que conectan clusters?
+
+- Métricas
+Tyron(), Cersei(), Geoffrey(), Robert(), Jaime(), Sansa()...
+¿es posible que haya otras que deberían tener diferente cantidad de conexiones?
+
+
+
+
+Equipo 1: Co-ocurrencias
+Tutorial: https://shirinsplayground.netlify.app/2018/03/got_network/
+Herramientas planteadas por el tutorial: tidygraph y ggraph (se puede apliar según necesidad)
+
+Se analiza sobre todos los 5 libros ... trabajar con los que tienen edges
+co-ocurrencias es cuando los personajes participan a lo largo de los 5 libros, toda la saga para definir la importancia de cada personaje
+
+TP Grupal
+Cada grupo trabaja con distinto libro https://github.com/mathbeveridge/asoiaf
+Tomando base asoaif-bookN-edges.csv
+Consigna base: Replicar el pipeline de análisis de (2018)
+Preguntas:
+Quienes son 5 personajes con mayor degree en el libro
+- Cuánto grupos detectan, su interpretación
+- Hay algún personaje que sea keyplayer en el libro pero no lo sería si miramos los 5 libros juntos? Por que?
+- Para todos: quien fue el key player principal de su libro? Cómo cambia el protagonista de la red según avanza la saga? Qué nos dice eso?
+
+---------------------------------------------------------------------------------
+
+Equipo 2: Casas - analizamos la importancia de los personajes por parentesco
+Tutorial: https://shiring.github.io/networks/2017/05/15/got_final
+Herramientas planteadas por el tutorial: igraph (también podemos usar el paquete sna o network, evaluar cuál conviene según las características de cada red)
+
+¿cómo se vinculan los miembros de las casas entre si y con miembros de otras casas?
+
+TP Grupal
+Cada grupo trabaja con distinta casa.
+Consigna base: Replicar el pipeline de análisis de (2017)
+Para un subgrafo de la casa con induced_subgraph()
+Preguntas:
+Quienes son los  5 personajes más importantes DENTRO de la casa?
+Top 5 por ranking promedio de las 5 métricas
+Aparecen sorpresas en el top 5 (ancestros, parientes lejanos)?
+El degree por sí solo puede traer …
+La estructura de la casa es concentrada o distribuida?
+Un patriarca con muchos lazos, o varios miembros con conexiones similares?
+Qué tipo de poder familiar muestra esta casa?
+Lazos sanguineos amplios, alianzas matrimoniales estratégicas, o ambos
+
+
+
