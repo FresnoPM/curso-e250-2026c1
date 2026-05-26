@@ -1,13 +1,13 @@
 # https://shiring.github.io/networks/2017/05/15/got_final
 rm(list=ls())
 
-install.packages("statnet")
 library(tidyverse)
 library(igraph)
 library(statnet)
 
-load("curso-e250-2026c1/Clases/union_characters.RData")
+load("curso-e250-2026c1/TP-GOT/union_characters.RData")
 summary(union_characters)
+unique(union_characters$house)
 # son 208 nodos, peronajes
 # cols: name, male, culture, house, popularity, house2, color, shape
 # Vendrían a ser los nodos
@@ -19,7 +19,7 @@ summary(union_characters)
 # el atributo de estilo "color" representa la casa, existen casas que no tienen color, eso significa que no son importantes
 
 
-load("curso-e250-2026c1/Clases/union_edges.RData")
+load("curso-e250-2026c1/TP-GOT/union_edges.RData")
 summary(union_edges)
 # cols: source, target, type, color, lty
 # Serían las aristas o vínculos entre los personajes, hay un total de 404 relaciones entre esos 208 personajes
@@ -39,7 +39,7 @@ head(union_graph)
 #     + attr: name (v/c), male (v/n), culture (v/x), house (v/c), popularity (v/n), house2 (v/c),
 # | color (v/c), shape (v/c), type (e/c), color (e/c), lty (e/c)
 # son los 404 vínculos dirigidos
-
+unique(union_characters$house)
 #####################################
 #####################################
 ### GRÁFICO DE RELACIONES ENTRE MIEMBROS AGRUPADOS POR CASAS
@@ -54,8 +54,8 @@ color_vertices <- union_characters %>%
 
 colors_edges <- union_edges %>%
     group_by(type, color) %>% # agrupa relaciones entre personajes según su tipo de vínculo (ej:padre, pareja)
-    summarise(n = n()) # %>%
-    #filter(!is.na(color)) #quita las relaciones que no tienen color
+    summarise(n = n()) %>%
+    filter(!is.na(color)) #quita las relaciones que no tienen color
 
 # Now, we can plot the graph object (here with Fruchterman-Reingold layout):
 
