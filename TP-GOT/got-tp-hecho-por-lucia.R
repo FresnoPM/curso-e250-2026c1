@@ -34,7 +34,7 @@ summary(union_edges)
 # 1     Lysa Arryn  Robert Arryn    mother  #7570B3  solid
 
 union_graph <- graph_from_data_frame(union_edges, directed = TRUE, vertices = union_characters)
-head(union_graph)
+
 # IGRAPH 216d11b DN-- 208 404 --
 #     + attr: name (v/c), male (v/n), culture (v/x), house (v/c), popularity (v/n), house2 (v/c),
 # | color (v/c), shape (v/c), type (e/c), color (e/c), lty (e/c)

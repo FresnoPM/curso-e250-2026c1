@@ -4,29 +4,35 @@ rm(list=ls())
 library(tidyverse)
 library(igraph)
 library(statnet)
-#  UN-- 10 13 --
-# + attr: name (v/c), male (v/n), culture (v/x), house (v/c), popularity (v/n), house2
-# | (v/c), color (v/c), shape (v/c), type (e/c), color (e/c), lty (e/c)
+library(dplyr)
 
-load("curso-e250-2026c1/TP-GOT/union_characters.RData")
-baratheon_characters <- union_characters %>%
-  filter(house == "House Baratheon") # 10 nodes
+load("curso-e250-2026c1/TP-GOT/union_characters.RData") # crea el objeto de tipo list "union_characters"
+load("curso-e250-2026c1/TP-GOT/union_edges.RData") # crea el objeto de tipo list "union_edges"
 
-load("curso-e250-2026c1/TP-GOT/union_edges.RData")
-
+# creo 2 objetos de tipo igraph en base a los 208 nodos de union_characters y las 404 conexiones dirigidas de union_edges: union_graph (v:208, e:404) y union_graph_undir (v:208, e:326)
 union_graph <- graph_from_data_frame(union_edges, directed = TRUE, vertices = union_characters)
-union_graph_undir <- graph_from_data_frame(union_edges, directed = FALSE, vertices = union_characters)
+union_graph_undir <- as_undirected(union_graph, mode = "collapse")
 
-baratheon_edges_total <- rbind(   # 31 elementos
+
+# creo objetos de tipo list filtrando union_characters y union_edges para que muestre únicamente aquellas filas donde haya al menos 1 Baratheon involucrado.
+# El df "baratheon_characters" es un listado de los 10 personajes de la casa Baratheon
+# El df "baratheon_edges_total" incluye vínculos entre 2 Baratheons y entre un Baratheon y alguien de otra casa. Este 2do lo utilizaremos en el futuro.
+
+baratheon_characters <- union_characters %>%
+  filter(house == "House Baratheon")
+
+baratheon_edges_total <- rbind(
   union_edges %>% filter(str_detect(source, "Baratheon")) ,
   union_edges %>% filter(str_detect(target, "Baratheon"))
+) |> distinct(source, target, .keep_all = TRUE)
 
-) #  %>% hoist unique() eliminar duplicados
 
+# creo un subgrafo en base a union_graph_undir con los vínculos entre 2 baratheons: "baratheon_graph_endo"(v:10, e:12)
 baratheon_graph_endo <- igraph::induced_subgraph(
   union_graph_undir,
   vids = igraph::V(union_graph_undir)$name %in% baratheon_characters$name
 )
+
 
 
 #####################################
@@ -37,33 +43,33 @@ baratheon_graph_endo <- igraph::induced_subgraph(
 # For plotting the legend, I am summarizing the edge and node colors.
 
 color_vertices <- union_characters %>%
-    group_by(house, color) %>% # agrupa personajes en grupos según sus casas y colores
-    summarise(n = n()) %>% # arma un nuevo df con una sola línea por casa (59 casas) y su color, agregando una columna aparte "n" que indica la cantidad de elementos de la lista baratheon_characters pertenecen a ese grupo
-    filter(!is.na(color)) # elimina aquellas casas que no tienen color, quedando un total de 9 casas (de 59 originales) que tienen color asignado
+  group_by(house, color) %>% # agrupa personajes en grupos según sus casas y colores
+  summarise(n = n()) %>% # arma un nuevo df con una sola línea por casa (59 casas) y su color, agregando una columna aparte "n" que indica la cantidad de elementos de la lista union_characters pertenecen a ese grupo
+  filter(!is.na(color)) # elimina aquellas casas que no tienen color, quedando un total de 9 casas (de 59 originales) que tienen color asignado
 
-colors_edges <- baratheon_edges_endo %>%
-    group_by(type, color) %>% # agrupa relaciones entre personajes según su tipo de vínculo (ej:padre, pareja)
-    summarise(n = n()) %>%
-    filter(!is.na(color)) #quita las relaciones que no tienen color
+colors_edges <- union_edges %>%
+  group_by(type, color) %>% # agrupa relaciones entre personajes según su tipo de vínculo (ej:padre, pareja)
+  summarise(n = n()) %>%
+  filter(!is.na(color)) #quita las relaciones que no tienen color
 
 # Now, we can plot the graph object (here with Fruchterman-Reingold layout):
 
-    layout <- layout_with_fr(graph_baratheon_endo)
+layout <- layout_with_fr(union_graph)
 
-    plot(graph_baratheon_endo, # red dirigida
-         layout = layout,
-         # CARACTERÍSTICAS DE LOS NODOS DEL GRÁFICO (PERSONAJES)
-         vertex.label = gsub(" ", "\n", V(graph_baratheon_endo)$name), #cada nodo representa un nombre del dataset "graph_baratheon_endo" (no dirigido, están todos los vínculos sin colapsar)
-         vertex.shape = V(graph_baratheon_endo)$shape,
-         vertex.color = V(graph_baratheon_endo)$color,
-         vertex.size = (V(graph_baratheon_endo)$popularity + 0.5) * 5,
-         vertex.frame.color = "gray",
-         vertex.label.color = "black",
-         vertex.label.cex = 0.8,
-         # CARACTERÍSTICAS DE LOS VÍNCULOS DEL GRÁFICO (RELACIONES)
-         edge.arrow.size = 0.5,
-         edge.color = E(graph_baratheon_endo)$color,
-         edge.lty = E(graph_baratheon_endo)$lty)
+plot(union_graph, # red dirigida
+     layout = layout,
+     # CARACTERÍSTICAS DE LOS NODOS DEL GRÁFICO (PERSONAJES)
+     vertex.label = gsub(" ", "\n", V(union_graph)$name), #cada nodo representa un nombre del dataset "union_graph" (no dirigido, están todos los vínculos sin colapsar)
+     vertex.shape = V(union_graph)$shape,
+     vertex.color = V(union_graph)$color,
+     vertex.size = (V(union_graph)$popularity + 0.5) * 5,
+     vertex.frame.color = "gray",
+     vertex.label.color = "black",
+     vertex.label.cex = 0.8,
+     # CARACTERÍSTICAS DE LOS VÍNCULOS DEL GRÁFICO (RELACIONES)
+     edge.arrow.size = 0.5,
+     edge.color = E(union_graph)$color,
+     edge.lty = E(union_graph)$lty)
 
 legend("topleft", legend = c(NA, "Node color:", as.character(color_vertices$house), NA, "Edge color:", as.character(colors_edges$type)), pch = 19,
        col = c(NA, NA, color_vertices$color, NA, NA, colors_edges$color), pt.cex = 5, cex = 2, bty = "n", ncol = 1, title = "")
@@ -73,6 +79,22 @@ legend("topleft", legend = "", cex = 4, bty = "n", ncol = 1,
 #####################################
 #####################################
 #####################################
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
