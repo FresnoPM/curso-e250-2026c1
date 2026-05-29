@@ -450,18 +450,17 @@ baratheon_characters <- left_join(baratheon_characters, eigen_centrality, eigenv
 
 # Let’s look at all characters from the major houses:
 
-baratheon_characters %>%
-    filter(!is.na(house2)) %>%
-    dplyr::select(-contains("_std")) %>%
-    gather(x, y, degree:eigen_centrality) %>%
-    ggplot(aes(x = name, y = y, color = house2)) +
-    geom_point(size = 3) +
-    facet_grid(x ~ house2, scales = "free") +
-    theme_bw() +
-    theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust=1))
+baratheon_characters %>% # imagen: matriz-adjacencia y matriz-adjacencia-todo-junto
+  filter(!is.na(house2)) %>%
+  dplyr::select(-contains("_std")) %>%
+  gather(x, y, degree:eigen_centrality) %>%
+  ggplot(aes(x = name, y = y, color = house2)) +
+  geom_point(size = 3) +
+  #facet_grid(x ~ house2, scales = "free") +
+  theme_bw() +
+  theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust=1))
 
 
-# Taken together, we could say that House Stark (specifically Ned and Sansa) and House Lannister (especially Tyrion) are the most important family connections in Game of Thrones.
 # Groups of nodes
 
 
