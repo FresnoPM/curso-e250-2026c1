@@ -237,7 +237,7 @@ data.frame(edge = attr(E(baratheon_graph_endo_undir), "vnames"), # creo un df co
 # 11       1   Cassana Baratheon|Renly Baratheon           4
 # 12       7 Cassana Baratheon|Steffon Baratheon           2
 
-plot(baratheon_graph_endo,
+plot(baratheon_graph_endo, # imagen: edge-betweenness.png
      #layout = layout,
      vertex.label = gsub(" ", "\n", V(baratheon_graph_endo)$name),
      # vertex.shape = V(baratheon_graph_endo_undir)$shape,
@@ -245,9 +245,9 @@ plot(baratheon_graph_endo,
      vertex.size = edge_betweenness * 0.1 ,
      vertex.frame.color = "gray",
      vertex.label.color = "black",
-     vertex.label.cex = 1.5,
+     vertex.label.cex = 1,
      edge.width = edge_betweenness * 0.2,
-     edge.arrow.size = 0.1,
+     edge.arrow.size = 0.8,
     # edge.color = E(baratheon_graph_endo_undir)$color,
      edge.lty = E(baratheon_graph_endo)$lty)
 
@@ -297,7 +297,7 @@ E(baratheon_graph_endo_undir_diameter)$width <- 1
 E(baratheon_graph_endo_undir_diameter, path = node_diameter)$color <- "red"
 E(baratheon_graph_endo_undir_diameter, path = node_diameter)$width <- 5
 
-plot(baratheon_graph_endo_undir_diameter,
+plot(baratheon_graph_endo_undir_diameter, # imagen: diameter-undirected.png
      #layout = layout,
      vertex.label = gsub(" ", "\n", V(baratheon_graph_endo_undir_diameter)$name),
      vertex.shape = V(baratheon_graph_endo_undir_diameter)$shape,
@@ -503,7 +503,7 @@ edge_kpath
 
 # This, we could plot with (but here, it does not give much additional information):
 
-    gplot(node_kpath$paths.bydyad,
+    gplot(node_kpath$paths.bydyad, # imagen: node-kpath-bydyad
           label.cex = 0.5,
           vertex.cex = 0.75,
           displaylabels = TRUE,
@@ -514,7 +514,7 @@ edge_kcycle <- kcycle.census(adjacency, maxlen = 8, mode = "graph", tabulate.by.
 node_kcycle_reduced <- node_kcycle$cycle.comemb
 node_kcycle_reduced <- node_kcycle_reduced[which(rowSums(node_kcycle_reduced) > 0), which(colSums(node_kcycle_reduced) > 0)]
 
-gplot(node_kcycle_reduced,
+gplot(node_kcycle_reduced, # imagen: node-kcycle-reduced
       label.cex = 0.5,
       vertex.cex = 0.75,
       displaylabels = TRUE,
@@ -533,7 +533,7 @@ edge_clique$clique.count
 node_clique_reduced <- node_clique$clique.comemb
 node_clique_reduced <- node_clique_reduced[which(rowSums(node_clique_reduced) > 0), which(colSums(node_clique_reduced) > 0)]
 
-gplot(node_clique_reduced,
+gplot(node_clique_reduced, # imagen: node-clique-reduced
       label.cex = 0.5,
       vertex.cex = 0.75,
       displaylabels = TRUE,
@@ -548,7 +548,7 @@ gplot(node_clique_reduced,
 # highlight first of largest cliques
 vcol[unlist(largest_cliques(baratheon_graph_endo_undir)[[1]])] <- "red"
 
-plot(baratheon_graph_endo_undir,
+plot(baratheon_graph_endo_undir, # imagen: largest-cliques.png
      #layout = layout,
      vertex.label = gsub(" ", "\n", V(baratheon_graph_endo_undir)$name),
      vertex.shape = V(baratheon_graph_endo_undir)$shape,
@@ -562,6 +562,9 @@ plot(baratheon_graph_endo_undir,
      edge.color = E(baratheon_graph_endo_undir)$color,
      edge.lty = E(baratheon_graph_endo_undir)$lty)
 
+
+
+
 # Clustering
 #
 # We can also look for groups within our network by clustering node groups according to their edge betweenness:
@@ -571,7 +574,7 @@ modularity(ceb)
 
 #  0.2777778 <-- irrelevante para grupos chicos
 
-plot(ceb,
+plot(ceb,  # imagen: cluster-edge-betweenness
      baratheon_graph_endo_undir,
      #layout = layout,
      vertex.label = gsub(" ", "\n", V(baratheon_graph_endo_undir)$name),
@@ -581,13 +584,14 @@ plot(ceb,
      vertex.label.color = "black",
      vertex.label.cex = 0.8)
 
+
 # Hay 2 clusters separados por edge betweennes que indica los hijos de Cassana y Steffon y los hijos de Robert
 
 # Or based on propagating labels:
 
     clp <- cluster_label_prop(baratheon_graph_endo_undir)
 
-plot(clp,
+plot(clp, # imagen: cluster-label-prop
      baratheon_graph_endo_undir,
      #layout = layout,
      vertex.label = gsub(" ", "\n", V(baratheon_graph_endo_undir)$name),
@@ -665,7 +669,7 @@ ec
 # Graph order: 10
 
 ec$cluster$labels <- ec$plabels
-plot(ec)
+plot(ec) # imagen: cluster-dendogram
 
 
 
