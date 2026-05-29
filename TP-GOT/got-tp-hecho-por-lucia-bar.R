@@ -691,3 +691,4 @@ grecip(adjacency, measure = "edgewise")
 sessionInfo()
 
 
+write.csv(baratheon_characters, "./Baratheon_Characters.csv", row.names=FALSE)
