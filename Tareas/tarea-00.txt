@@ -14,3 +14,17 @@
  270  git push -u origin main
  271  git status
  272  history > Tareas/tarea-00.txt
+
+Versión reducida:
+$ mkdir carpeta_nueva && cd carpeta_nueva
+        # empiezo en una carpeta limpia
+$ git init
+        # inicio una estructura git dentro de este repositorio vacío
+$ gh repo create nombre_del_repo --pubilc --description "descripción_del_repo"
+        # creo un repositorio remoto dentro d e github logueándome con mis credenciales de github (previamente configuradas en la aplicación GH CLI a través de gh auth login)
+$ git remote add origin https://github.com/mi_usuario/nombre_del_repo.git
+        # vinculo este repositorio de git con el repositorio remoto recién creado de github
+$ nano README.md
+        # creo un nuevo archivo README (puede ser cualquier otra cosa)
+$ gitaddcomm "initial commit - README file" && git push origin main
+        # creo el primer commit con el primer archivo y lo empujo a la rama principal
